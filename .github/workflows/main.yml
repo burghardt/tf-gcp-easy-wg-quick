@@ -19,7 +19,7 @@ jobs:
         id: tfvars
         run: |
           tee terraform.tfvars << EOF
-          project = "prj"
+          project          = "prj"
           credentials_file = "/dev/null"
           EOF
       - name: format

@@ -3,6 +3,9 @@ set -x
 set -euo pipefail
 IFS=$'\n\t'
 
+ua status --wait
+sudo ua refresh
+
 snap refresh
 
 apt update

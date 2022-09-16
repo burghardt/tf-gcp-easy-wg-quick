@@ -40,6 +40,11 @@ data "google_compute_image" "wghub_instance_image" {
   project = var.wghub_instance_image_project
 }
 
+resource "google_service_account" "wghub_instance_account" {
+  account_id   = "wghub-instance-account-id"
+  display_name = "wghub-instance-service-account"
+}
+
 resource "google_compute_instance" "wghub_instance" {
   name         = "wghub-instance"
   machine_type = "f1-micro"
@@ -60,6 +65,11 @@ resource "google_compute_instance" "wghub_instance" {
     network = google_compute_network.wghub_network.name
     access_config {
     }
+  }
+
+  service_account {
+    email  = google_service_account.wghub_instance_account.email
+    scopes = ["cloud-platform"]
   }
 
   tags = ["wghub"]

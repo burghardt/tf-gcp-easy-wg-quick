@@ -1,0 +1,36 @@
+name: tf-gcp-easy-wg-quick workflow
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron:  '0 0 * * *'
+
+jobs:
+  build:
+    name: terraform
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+      - name: setup
+        uses: hashicorp/setup-terraform@v1
+      - name: tfvars
+        id: tfvars
+        run: |
+          tee terraform.tfvars << EOF
+          project = "prj"
+          credentials_file = "/dev/null"
+          EOF
+      - name: format
+        id: fmt
+        run: terraform fmt -check
+      - name: init
+        id: init
+        run: terraform init
+      - name: validate
+        id: validate
+        run: terraform validate -no-color
+      - name: plan
+        id: plan
+        run: terraform plan -no-color -input=false

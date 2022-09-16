@@ -50,6 +50,10 @@ resource "google_compute_instance" "wghub_instance" {
     }
   }
 
+  shielded_instance_config {
+    enable_secure_boot = true
+  }
+
   metadata_startup_script = file("instance-startup.bash")
 
   network_interface {

@@ -30,6 +30,11 @@ Unattended-Upgrade::Automatic-Reboot "true";
 Unattended-Upgrade::Automatic-Reboot-Time "03:30";
 EOF
 
+pushd /var/local
+    curl -sSO https://dl.google.com/cloudagents/add-google-cloud-ops-agent-repo.sh
+    bash add-google-cloud-ops-agent-repo.sh --also-install
+popd
+
 git clone https://github.com/burghardt/easy-wg-quick.git \
     /var/local/easy-wg-quick
 
@@ -40,7 +45,7 @@ pushd /var/local/easy-wg-quick
     ./easy-wg-quick
 
     cp wghub.conf /etc/wireguard/wghub.conf
-pushd
+popd
 
 systemctl enable wg-quick@wghub
 systemctl start wg-quick@wghub

@@ -45,6 +45,16 @@ resource "google_service_account" "wghub_instance_account" {
   display_name = "wghub-instance-service-account"
 }
 
+resource "google_project_iam_binding" "wghub_instance_account_iam" {
+  for_each = toset([
+    "roles/logging.logWriter",
+    "roles/monitoring.metricWriter",
+  ])
+  role    = each.key
+  project = var.project
+  members = ["serviceAccount:${google_service_account.wghub_instance_account.email}"]
+}
+
 resource "google_compute_instance" "wghub_instance" {
   name         = "wghub-instance"
   machine_type = "f1-micro"

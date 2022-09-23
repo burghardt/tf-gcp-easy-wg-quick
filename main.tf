@@ -6,7 +6,20 @@ provider "google" {
 }
 
 resource "google_compute_network" "wghub_network" {
-  name = "wghub-network"
+  name                    = "wghub-network"
+  auto_create_subnetworks = false
+}
+
+resource "google_compute_subnetwork" "wghub_subnetwork" {
+  name = "wghub-subnetwork"
+
+  ip_cidr_range = "10.0.0.0/29"
+  region        = var.region
+
+  stack_type       = "IPV4_IPV6"
+  ipv6_access_type = "EXTERNAL"
+
+  network = google_compute_network.wghub_network.name
 }
 
 resource "google_compute_firewall" "iap_firewall" {
@@ -72,7 +85,8 @@ resource "google_compute_instance" "wghub_instance" {
   metadata_startup_script = file("instance-startup.bash")
 
   network_interface {
-    network = google_compute_network.wghub_network.name
+    subnetwork = google_compute_subnetwork.wghub_subnetwork.name
+    stack_type = "IPV4_IPV6"
     access_config {
     }
   }

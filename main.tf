@@ -89,6 +89,9 @@ resource "google_compute_instance" "wghub_instance" {
     stack_type = "IPV4_IPV6"
     access_config {
     }
+    ipv6_access_config {
+      network_tier = "PREMIUM"
+    }
   }
 
   service_account {

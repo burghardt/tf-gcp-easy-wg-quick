@@ -33,13 +33,28 @@ resource "google_compute_firewall" "iap_firewall" {
   }
 }
 
-resource "google_compute_firewall" "wghub_firewall" {
-  name          = "allow-wg-from-anywhere"
+resource "google_compute_firewall" "wghub_ipv4_firewall" {
+  name          = "allow-wg-and-icmp-from-anywhere"
   network       = google_compute_network.wghub_network.name
   source_ranges = ["0.0.0.0/0"]
 
   allow {
     protocol = "icmp"
+  }
+
+  allow {
+    protocol = "udp"
+    ports    = ["443"]
+  }
+}
+
+resource "google_compute_firewall" "wghub_ipv6_firewall" {
+  name          = "allow-wg-and-icmpv6-from-anywhere"
+  network       = google_compute_network.wghub_network.name
+  source_ranges = ["::/0"]
+
+  allow {
+    protocol = "58" // ICMPv6
   }
 
   allow {

@@ -5,6 +5,14 @@ provider "google" {
   region      = var.region
 }
 
+resource "google_project_service" "gcp_services" {
+  for_each = toset(var.service_list)
+  project  = var.project
+  service  = each.key
+
+  disable_dependent_services = true
+}
+
 resource "google_compute_network" "wghub_network" {
   name                    = "wghub-network"
   auto_create_subnetworks = false

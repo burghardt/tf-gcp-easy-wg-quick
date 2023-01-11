@@ -16,6 +16,8 @@ resource "google_project_service" "gcp_services" {
 resource "google_compute_network" "wghub_network" {
   name                    = "wghub-network"
   auto_create_subnetworks = false
+
+  depends_on = [google_project_service.gcp_services["compute.googleapis.com"]]
 }
 
 resource "google_compute_subnetwork" "wghub_subnetwork" {
@@ -86,9 +88,10 @@ resource "google_project_iam_binding" "wghub_instance_account_iam" {
     "roles/logging.logWriter",
     "roles/monitoring.metricWriter",
   ])
-  role    = each.key
-  project = var.project
-  members = ["serviceAccount:${google_service_account.wghub_instance_account.email}"]
+  role       = each.key
+  project    = var.project
+  members    = ["serviceAccount:${google_service_account.wghub_instance_account.email}"]
+  depends_on = [google_project_service.gcp_services["iam.googleapis.com"]]
 }
 
 resource "google_compute_instance" "wghub_instance" {

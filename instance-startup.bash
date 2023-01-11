@@ -40,7 +40,7 @@ git clone https://github.com/burghardt/easy-wg-quick.git \
 
 pushd /var/local/easy-wg-quick
     echo 443 > portno.txt
-    curl ifconfig.co/ip > extnetip.txt
+    curl -4 ifconfig.co/ip > extnetip.txt
 
     ./easy-wg-quick
 

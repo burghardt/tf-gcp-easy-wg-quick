@@ -133,6 +133,9 @@ resource "null_resource" "client_qrcode" {
     command = "echo 'allow 180 seconds for boot-up' ; sleep 180"
   }
   provisioner "local-exec" {
+    command = "gcloud config set project ${var.project}"
+  }
+  provisioner "local-exec" {
     command     = "systemctl is-system-running --wait >/dev/null 2>&1 ; sudo cat /var/local/easy-wg-quick/wgclient_10.qrcode.txt"
     interpreter = ["gcloud", "compute", "ssh", "--tunnel-through-iap", "--zone", "${var.zone}", "${google_compute_instance.wghub_instance.name}", "--command"]
   }

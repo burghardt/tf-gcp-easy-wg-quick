@@ -17,3 +17,7 @@ output "qrcode_retrieval_command" {
 output "interactive_shell_command" {
   value = "gcloud compute ssh --tunnel-through-iap --zone ${var.zone} ${google_compute_instance.wghub_instance.name}"
 }
+
+output "gcloud_set_project" {
+  value = "gcloud config set project ${var.project}"
+}

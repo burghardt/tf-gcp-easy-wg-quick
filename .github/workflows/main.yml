@@ -36,4 +36,4 @@ jobs:
         id: validate
         run: terraform validate -no-color
       - name: shellcheck
-        run: shellcheck -s bash instance-startup.bash
+        run: shellcheck -a -C -s bash -S style -o all instance-startup.bash

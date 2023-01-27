@@ -15,6 +15,13 @@ apt -y install git iptables unattended-upgrades \
 apt -y autoremove
 apt autoclean
 
+tee /etc/apt/apt.conf.d/20auto-upgrades << 'EOF'
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Download-Upgradeable-Packages "1";
+APT::Periodic::AutocleanInterval "7";
+APT::Periodic::Unattended-Upgrade "1";
+EOF
+
 tee /etc/apt/apt.conf.d/50unattended-upgrades << 'EOF'
 Unattended-Upgrade::Allowed-Origins {
     "${distro_id}:${distro_codename}-security";

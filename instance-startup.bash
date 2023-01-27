@@ -3,6 +3,9 @@ set -x
 set -euo pipefail
 IFS=$'\n\t'
 
+ufw allow ssh
+ufw enable
+
 ua status --wait
 sudo ua refresh
 
@@ -46,6 +49,7 @@ git clone https://github.com/burghardt/easy-wg-quick.git \
     /var/local/easy-wg-quick
 
 pushd /var/local/easy-wg-quick
+    echo ufw > fwtype.txt
     echo 443 > portno.txt
     curl -4 ifconfig.co/ip > extnetip.txt
 

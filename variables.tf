@@ -25,10 +25,6 @@ variable "service_list" {
   type        = list(string)
   default = [
     "iam.googleapis.com",
-    # Cloud Resource Manager API needs to be enabled manually according to
-    # https://github.com/hashicorp/terraform-provider-google/issues/6101
-    # When running terraform for the first time in the project you will see
-    # an error message with link to Cloud Console to enable this API.
     "cloudresourcemanager.googleapis.com",
     "compute.googleapis.com"
   ]

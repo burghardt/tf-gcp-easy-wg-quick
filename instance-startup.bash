@@ -9,6 +9,7 @@ ufw enable
 ua status --wait
 ua refresh
 
+canonical-livepatch refresh
 snap refresh
 snap install docker
 snap start docker

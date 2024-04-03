@@ -10,6 +10,8 @@ ua status --wait
 sudo ua refresh
 
 snap refresh
+snap install docker
+snap start docker
 
 apt update
 apt -y upgrade

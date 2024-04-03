@@ -7,7 +7,7 @@ ufw allow ssh
 ufw enable
 
 ua status --wait
-sudo ua refresh
+ua refresh
 
 snap refresh
 snap install docker

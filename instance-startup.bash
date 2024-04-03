@@ -14,11 +14,8 @@ snap install docker
 snap start docker
 
 apt update
-apt -y upgrade
-apt -y install git iptables unattended-upgrades \
-               wireguard-tools mawk grep iproute2 qrencode
-apt -y autoremove
-apt autoclean
+apt -y full-upgrade
+apt -y install unattended-upgrades wireguard-tools
 
 tee /etc/apt/apt.conf.d/20auto-upgrades << 'EOF'
 APT::Periodic::Update-Package-Lists "1";

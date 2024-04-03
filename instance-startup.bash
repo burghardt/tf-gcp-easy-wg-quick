@@ -52,7 +52,7 @@ pushd /root/easy-wg-quick
     ip route sh | awk '$1 == "default" && $2 == "via" { print $5; exit }' > extnetif.txt
     curl -4 ifconfig.co/ip > extnetip.txt
 
-    docker run --rm -v "$PWD:/pwd" ghcr.io/burghardt/easy-wg-quick
+    docker run --rm -v "${PWD}:/pwd" ghcr.io/burghardt/easy-wg-quick
 
     cp wghub.conf /etc/wireguard/wghub.conf
 popd

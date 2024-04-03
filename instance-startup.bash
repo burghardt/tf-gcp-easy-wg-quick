@@ -45,15 +45,14 @@ pushd /var/local
     bash add-google-cloud-ops-agent-repo.sh --also-install
 popd
 
-git clone https://github.com/burghardt/easy-wg-quick.git \
-    /var/local/easy-wg-quick
-
-pushd /var/local/easy-wg-quick
+mkdir -p /root/easy-wg-quick
+pushd /root/easy-wg-quick
     echo ufw > fwtype.txt
     echo 443 > portno.txt
+    ip route sh | awk '$1 == "default" && $2 == "via" { print $5; exit }' > extnetif.txt
     curl -4 ifconfig.co/ip > extnetip.txt
 
-    ./easy-wg-quick
+    docker run --rm -v "$PWD:/pwd" ghcr.io/burghardt/easy-wg-quick
 
     cp wghub.conf /etc/wireguard/wghub.conf
 popd

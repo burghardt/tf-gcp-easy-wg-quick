@@ -11,7 +11,7 @@ output "wghub_public_ip" {
 }
 
 output "qrcode_retrieval_command" {
-  value = "gcloud compute ssh --tunnel-through-iap --zone ${var.zone} ${google_compute_instance.wghub_instance.name} --command 'sudo cat /var/local/easy-wg-quick/wgclient_10.qrcode.txt'"
+  value = "gcloud compute ssh --tunnel-through-iap --zone ${var.zone} ${google_compute_instance.wghub_instance.name} --command 'sudo cat /root/easy-wg-quick/wgclient_10.qrcode.txt'"
 }
 
 output "interactive_shell_command" {

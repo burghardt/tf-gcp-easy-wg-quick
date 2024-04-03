@@ -59,7 +59,7 @@ use [IAP] tunneling to access wghub securely.
 
 ### Accessing easy-wg-quick data
 
-Script data is available on wghub instance in the `/var/local/easy-wg-quick`
+Script data is available on wghub instance in the `/root/easy-wg-quick`
 directory.
 
 ## License

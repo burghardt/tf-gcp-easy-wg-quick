@@ -19,11 +19,16 @@ Clone repository.
 
 ## Usage
 
+Login to your GCP account, when [running Terraform on your workstation] use
+command below.
+
+    gcloud auth application-default login
+
 Set JSON credentials file name and GCP project name in the `terraform.tfvars`
 file.
 
     project          = "gcp-project-name"
-    credentials_file = "credentials.json"
+    credentials_file = "~/.config/gcloud/application_default_credentials.json"
 
 Then follow the typical Terraform command sequence to deploy `easy-wg-quick`
 to the cloud.
@@ -69,6 +74,7 @@ for details.
 
 [easy-wg-quick]: https://github.com/burghardt/easy-wg-quick
 [gcloud]: https://cloud.google.com/sdk/docs/install
+[running Terraform on your workstation]: https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#running-terraform-on-your-workstation
 [terraform]: https://learn.hashicorp.com/tutorials/terraform/install-cli
 [instance-startup.bash]: instance-startup.bash
 [IAP]: https://cloud.google.com/iap/

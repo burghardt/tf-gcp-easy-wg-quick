@@ -36,6 +36,7 @@ resource "google_compute_firewall" "iap_firewall" {
   name          = "allow-ssh-from-iap"
   network       = google_compute_network.wghub_network.name
   source_ranges = ["35.235.240.0/20"]
+  target_tags   = ["wghub"]
 
   allow {
     protocol = "tcp"

@@ -39,5 +39,5 @@ variable "wghub_instance_image_project" {
 variable "wghub_instance_image_family" {
   description = "Specify the boot image family name."
   type        = string
-  default     = "ubuntu-pro-2204-lts"
+  default     = "ubuntu-pro-2404-lts-amd64"
 }

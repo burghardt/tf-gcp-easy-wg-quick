@@ -21,7 +21,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends shellcheck
       - name: checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: setup
         uses: hashicorp/setup-terraform@v3
       - name: tfvars

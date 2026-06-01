@@ -5,7 +5,7 @@ terraform {
       version = "~> 7.26.0"
     }
     null = {
-      version = "~> 3.2.2"
+      version = "~> 3.3.0"
     }
   }
 }
